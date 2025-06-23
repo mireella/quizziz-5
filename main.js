@@ -1,88 +1,24 @@
 const questions = [
   { 
-    text: "A diversidade cultural deve ser protegida e promovida em todas as sociedades.",
+    text: "A preservação da diversidade cultural é essencial para manter as identidades e histórias únicas dos povos, mesmo em um mundo cada vez mais globalizado. Você acredita que essa valorização deve ser uma prioridade das políticas públicas?",
     category: "cultural"
   },
   { 
-    text: "As mudanças climáticas são causadas principalmente por atividades humanas.",
+    text: "Estudos científicos indicam que a intensificação das mudanças climáticas está fortemente ligada às atividades humanas, como a queima de combustíveis fósseis e o desmatamento. Você concorda que essas ações humanas são as principais causas da crise climática atual?",
     category: "ambiental"
   },
   { 
-    text: "A desigualdade social é um dos principais desafios do século XXI.",
+    text: "Apesar dos avanços tecnológicos e econômicos, a desigualdade social continua afetando o acesso a direitos básicos como educação, saúde e moradia. Você considera que a redução das desigualdades deveria ser uma prioridade urgente dos governos?",
     category: "social"
   },
   { 
-    text: "É importante valorizar e preservar os conhecimentos indígenas.",
+    text: "Os saberes tradicionais dos povos indígenas sobre a natureza, saúde e convivência com o meio ambiente representam um patrimônio imaterial de valor inestimável. Você acredita que esses conhecimentos devem ser respeitados e integrados nas decisões contemporâneas?",
     category: "cultural"
   },
   { 
-    text: "O consumo consciente pode ajudar a preservar os recursos naturais.",
+    text: "Diante da crescente exploração dos recursos naturais e do consumo desenfreado, cresce a necessidade de práticas mais conscientes no dia a dia das pessoas. Você concorda que o consumo responsável pode ser uma ferramenta efetiva para preservar o meio ambiente?",
     category: "ambiental"
   },
 ];
 
-let current = 0;
-const answers = [];
-
-function showQuestion() {
-  if (current >= questions.length) {
-    showResult();
-    return;
-  }
-
-  const q = questions[current];
-  const quizDiv = document.getElementById("quiz");
-  quizDiv.innerHTML = `
-    <div class="question">
-      <h2>Pergunta ${current + 1}</h2>
-      <p>${q.text}</p>
-      <div class="answers">
-        <button onclick="answer(true)">Concordo</button>
-        <button onclick="answer(false)">Discordo</button>
-      </div>
-    </div>
-  `;
-}
-
-function answer(userChoice) {
-  answers.push({ ...questions[current], userChoice });
-  current++;
-  showQuestion();
-}
-
-function showResult() {
-  const resultDiv = document.getElementById("result");
-  document.getElementById("quiz").style.display = "none";
-
-  const count = {
-    cultural: 0,
-    ambiental: 0,
-    social: 0,
-  };
-
-  answers.forEach(ans => {
-    if (ans.userChoice) count[ans.category]++;
-  });
-
-  let summary = "<h2>Resumo das suas escolhas:</h2>";
-
-  if (count.cultural >= 2) {
-
-   summary += "<p>Você demonstra grande valorização pela cultura e diversidade.</p>";
-  }
-  if (count.ambiental >= 2) {
-    summary += "<p>Sua consciência ambiental é evidente em suas respostas.</p>";
-  }
-  if (count.social >= 1) {
-    summary += "<p>Você reconhece a importância das questões sociais.</p>";
-  }
-  if (count.cultural + count.ambiental + count.social === 0) {
-    summary += "<p>Você parece cético ou crítico em relação às questões sociais, culturais e ambientais.</p>";
-  }
-
-  resultDiv.innerHTML = summary;
-  resultDiv.style.display = "block";
-}
-
-showQuestion();
 
